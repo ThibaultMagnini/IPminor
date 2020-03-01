@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+
+<th:block th:if="${task != null}">
+    <p th:text="'This is the detail page of ' + ${task.name}"></p>
+</th:block>
+<th:block th:if="${task == null}">
+    <p>Task not found</p>
+</th:block>
+</body>
+</html>
