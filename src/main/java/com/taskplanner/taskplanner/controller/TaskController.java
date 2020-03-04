@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @Controller
 public class TaskController {
     private final TaskService taskService;
@@ -36,6 +38,18 @@ public class TaskController {
     @PostMapping("/task/new")
     public String addTask(@ModelAttribute Task task){
         taskService.addTask(task);
+        return "redirect:/task";
+    }
+
+    @GetMapping("/task/edit/{id}")
+    public String showTaskEdit(@PathVariable("id") int id, Model model){
+        model.addAttribute("task", taskService.getTask(id));
+        return "taskEdit";
+    }
+
+    @PostMapping("/task/edit/{id}")
+    public String taskEdit(@PathVariable("id") int id, @RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("dueDate")LocalDateTime localDateTime){
+        taskService.taskEdit(name, description, localDateTime, id);
         return "redirect:/task";
     }
 }

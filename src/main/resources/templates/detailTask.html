@@ -8,6 +8,10 @@
 
 <th:block th:if="${task != null}">
     <p th:text="'This is the detail page of ' + ${task.name}"></p>
+
+    <form th:action="${'/task/edit/' + task.id}" method="get">
+        <input type="submit" value="Edit" class="btn btn-primary mb-2">
+    </form>
 </th:block>
 <th:block th:if="${task == null}">
     <p>Task not found</p>
