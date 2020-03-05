@@ -16,8 +16,8 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarToggle">
                         <div class="navbar-nav mr-auto">
-                            <a class="nav-item nav-link" href="/task">Home</a>
-                            <a class="nav-item nav-link" href="/task/new">New Task</a>
+                            <a class="nav-item nav-link" href="/tasks">Home</a>
+                            <a class="nav-item nav-link" href="/tasks/new">New Task</a>
                         </div>
                         <!-- Navbar Right Side -->
                         <!--<div class="navbar-nav">
@@ -44,7 +44,7 @@
                                 <a class="mr-2" href="#" th:text="'Due on: ' + ${task.dueDate}"></a>
                                 <small class="text-muted"></small>
                             </div>
-                            <h2><a class="article-title" th:href="@{/task/{id}(id = ${task.id})}" th:text="*{task.name}"></a></h2>
+                            <h2><a class="article-title" th:href="@{/tasks/{id}(id = ${task.id})}" th:text="*{task.name}"></a></h2>
                             <p class="article-content" th:text="*{task.description}"></p>
                         </div>
                     </article>

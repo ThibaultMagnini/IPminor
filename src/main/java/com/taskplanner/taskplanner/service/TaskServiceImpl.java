@@ -1,5 +1,6 @@
 package com.taskplanner.taskplanner.service;
 
+import com.taskplanner.taskplanner.domain.Subtask;
 import com.taskplanner.taskplanner.domain.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,21 +47,22 @@ public class TaskServiceImpl implements TaskService {
         return null;
     }
 
+    //TODO fix
     @Override
-    public void addSubtask(Task task, int id) {
+    public void addSubtask(Subtask task, int id) {
         getTask(id).addSubtask(task);
     }
 
     @Override
-    public List<Task> getSubtasks(int id) {
+    public List<Subtask> getSubtasks(int id) {
         return getTask(id).getSubtasks();
     }
 
     @Override
-    public void taskEdit(String name, String description, LocalDateTime localDateTime, int id) {
-        Task t = getTask(id);
-        t.setName(name);
-        t.setDescription(description);
-        t.setDueDate(localDateTime);
+    public void taskEdit(Task task) {
+        Task t = getTask(task.getId());
+        t.setName(task.getName());
+        t.setDescription(task.getDescription());
+        t.setDueDate(task.getDueDate());
     }
 }

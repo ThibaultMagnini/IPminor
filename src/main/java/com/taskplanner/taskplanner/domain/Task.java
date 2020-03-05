@@ -1,6 +1,5 @@
 package com.taskplanner.taskplanner.domain;
 
-import javafx.scene.control.Tab;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -14,7 +13,7 @@ public class Task {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime dueDate;
     private int id;
-    private List<Task> subtasks;
+    private List<Subtask> subtasks;
 
     public Task(String name, String description, LocalDateTime dueDate){
         this.dueDate = dueDate;
@@ -23,7 +22,9 @@ public class Task {
         subtasks = new ArrayList<>();
     }
 
-    public List<Task> getSubtasks() {
+
+
+    public List<Subtask> getSubtasks() {
         return subtasks;
     }
 
@@ -31,7 +32,7 @@ public class Task {
         this.id = id;
     }
 
-    public void addSubtask(Task task){
+    public void addSubtask(Subtask task){
         subtasks.add(task);
     }
 
