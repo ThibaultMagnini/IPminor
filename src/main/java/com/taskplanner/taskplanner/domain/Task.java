@@ -2,17 +2,26 @@ package com.taskplanner.taskplanner.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.annotation.processing.Generated;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Task {
     private String name;
     private String description;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime dueDate;
+    @Id
+    @GeneratedValue
     private int id;
+    @Transient
     private List<Subtask> subtasks;
 
     public Task(String name, String description, LocalDateTime dueDate){
@@ -22,7 +31,9 @@ public class Task {
         subtasks = new ArrayList<>();
     }
 
+    public Task(){
 
+    }
 
     public List<Subtask> getSubtasks() {
         return subtasks;

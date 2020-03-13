@@ -1,12 +1,15 @@
 package com.taskplanner.taskplanner.domain;
 
-//TODO
-public class SubtaskDTO {
+import java.time.LocalDateTime;
 
+public class TaskDTO {
     private String name, description;
+
+    private LocalDateTime dueDate;
     private int id;
 
-    public SubtaskDTO() {
+    public TaskDTO(){
+
     }
 
     public String getName() {
@@ -23,6 +26,14 @@ public class SubtaskDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public LocalDateTime getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDateTime dueDate) {
+        this.dueDate = dueDate;
     }
 
     public int getId() {

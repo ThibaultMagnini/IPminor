@@ -2,10 +2,20 @@ package com.taskplanner.taskplanner.domain;
 
 public class Subtask {
     private String naam, description;
+    private Task task;
 
-    public Subtask(String naam, String description) {
+    public Subtask(String naam, String description, Task task) {
         this.naam = naam;
         this.description = description;
+        setTask(task);
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+
+    public Task getTask() {
+        return task;
     }
 
     public String getNaam() {
