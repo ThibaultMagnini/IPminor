@@ -3,10 +3,7 @@ package com.taskplanner.taskplanner.domain;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.annotation.processing.Generated;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,9 +16,9 @@ public class Task {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime dueDate;
     @Id
-    @GeneratedValue
-    private int id;
-    @Transient
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @OneToMany(mappedBy = "task", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Subtask> subtasks;
 
     public Task(String name, String description, LocalDateTime dueDate){
@@ -39,7 +36,7 @@ public class Task {
         return subtasks;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -67,7 +64,7 @@ public class Task {
         return description;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

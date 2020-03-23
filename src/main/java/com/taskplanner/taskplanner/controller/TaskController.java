@@ -4,6 +4,7 @@ import com.taskplanner.taskplanner.domain.Subtask;
 import com.taskplanner.taskplanner.domain.SubtaskDTO;
 import com.taskplanner.taskplanner.domain.Task;
 import com.taskplanner.taskplanner.domain.TaskDTO;
+import com.taskplanner.taskplanner.repositories.SubTaskRepository;
 import com.taskplanner.taskplanner.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -52,16 +53,17 @@ public class TaskController {
     @PostMapping("/tasks/new")
     public String addTask(@ModelAttribute @Valid TaskDTO task, BindingResult bindingResult){
         if (bindingResult.hasErrors()){
-            return "redirect:/tasks/new";
+            System.out.println(bindingResult.getAllErrors());
+            return "addTask";
         }
         taskService.addTask(task);
-        return "redirect:/task";
+        return "redirect:/tasks";
     }
 
     @GetMapping("/tasks/edit/{id}")
     public String showTaskEdit(@PathVariable("id") int id, Model model){
         TaskDTO task = new TaskDTO();
-        task.setId(id);
+        //task.setId(id);
         task.setDescription(taskService.getTask(id).getDescription());
         task.setName(taskService.getTask(id).getName());
         task.setDueDate(taskService.getTask(id).getDueDate());
@@ -72,16 +74,18 @@ public class TaskController {
     @PostMapping("/tasks/edit")
     public String taskEdit(@ModelAttribute TaskDTO task, BindingResult bindingResult, Model model){
         model.addAttribute("task", task);
-        if (bindingResult.hasErrors()){
-            return "taskEdit";
-        }
+        System.out.println(task.getName());
+        System.out.println(task.getDueDate());
+        System.out.println(task.getDescription());
+        System.out.println(task.getId());
         taskService.taskEdit(task);
         return "redirect:/tasks";
     }
 
     @GetMapping("/tasks/{id}/sub/create")
     public String showSubTask(Model model, @PathVariable("id") int id){
-        SubtaskDTO dto =new SubtaskDTO();
+        model.addAttribute("taskID", taskService.getTask(id));
+        SubtaskDTO dto = new SubtaskDTO();
         dto.setId(id);
         model.addAttribute("task", dto);
         return "addSubtask";
@@ -90,7 +94,7 @@ public class TaskController {
     @PostMapping("/tasks/sub/create")
     public String addSubtask(@ModelAttribute SubtaskDTO task, BindingResult bindingResult, Model model){
         model.addAttribute("task",taskService.getTask(task.getId()));
-        model.addAttribute("task" , task);
+        model.addAttribute("taak" , task);
         taskService.addSubtask(task);
         return "redirect:/tasks/" + task.getId();
     }

@@ -1,10 +1,9 @@
 package com.taskplanner.taskplanner.domain;
 
-//TODO
 public class SubtaskDTO {
 
     private String name, description;
-    private int id;
+    private long id;
 
     public SubtaskDTO() {
     }
@@ -25,11 +24,11 @@ public class SubtaskDTO {
         this.description = description;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

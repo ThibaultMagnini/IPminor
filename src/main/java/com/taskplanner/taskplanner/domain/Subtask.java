@@ -1,13 +1,30 @@
 package com.taskplanner.taskplanner.domain;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.*;
+
+@Entity
 public class Subtask {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String naam, description;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Task task;
 
     public Subtask(String naam, String description, Task task) {
-        this.naam = naam;
-        this.description = description;
+        setNaam(naam);
+        setDescription(description);
         setTask(task);
+    }
+
+    public Subtask () {
+
     }
 
     public void setTask(Task task) {

@@ -13,11 +13,11 @@ public interface TaskService {
 
     void addTask(TaskDTO task);
 
-    Task getTask(int id);
+    Task getTask(long id);
 
     void addSubtask(SubtaskDTO task);
 
-    List<Subtask> getSubtasks(int id);
+    List<Subtask> getSubtasks(long id);
 
     void taskEdit(TaskDTO task);
 

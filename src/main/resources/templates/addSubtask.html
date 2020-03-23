@@ -5,15 +5,15 @@
     <title>Add Subtask</title>
 </head>
 <body>
-<form method="post" th:action="${'/tasks/sub/create'}">
+<form method="post" th:action="${'/tasks/sub/create'}" th:object="${task}">
     <h4 th:text="${'Add subtask to Task: ' + task.name}"></h4>
     <div>
         <label for="name">Name: </label>
-        <input type="text" name="name" id="name">
+        <input type="text" th:field="*{name}">
     </div>
     <div>
         <label for="description">Description: </label>
-        <input type="text" name="description" id="description">
+        <input type="text" th:field="*{description}">
     </div>
     <input type="hidden" name="id" th:value="${task.id}">
     <input type="submit" value="Add Subtask">

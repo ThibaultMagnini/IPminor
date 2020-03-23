@@ -1,16 +1,20 @@
 package com.taskplanner.taskplanner.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 public class TaskDTO {
+    @NotEmpty
     private String name, description;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime dueDate;
-    private int id;
 
-    public TaskDTO(){
+    private long id;
 
-    }
+    public TaskDTO(){ }
 
     public String getName() {
         return name;
@@ -36,11 +40,11 @@ public class TaskDTO {
         this.dueDate = dueDate;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

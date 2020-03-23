@@ -1,25 +1,28 @@
 package com.taskplanner.taskplanner.service;
 
-import com.taskplanner.taskplanner.TaakRepository;
+import com.taskplanner.taskplanner.repositories.SubTaskRepository;
+import com.taskplanner.taskplanner.repositories.TaakRepository;
 import com.taskplanner.taskplanner.domain.Subtask;
 import com.taskplanner.taskplanner.domain.SubtaskDTO;
 import com.taskplanner.taskplanner.domain.Task;
 import com.taskplanner.taskplanner.domain.TaskDTO;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class TaskServiceImpl implements TaskService {
     private TaakRepository repository;
+    private SubTaskRepository subTaskRepository;
 
     @Autowired
-    public TaskServiceImpl(TaakRepository repository){
+    public TaskServiceImpl(TaakRepository repository, SubTaskRepository subTaskRepository){
         this.repository = repository;
+        this.subTaskRepository = subTaskRepository;
+
         repository.save(new Task("jef", "ga naar de bakker", LocalDateTime.now()));
 //        tasks = new ArrayList<>();
 //        tasks.add(new Task("Task 1", "first task", LocalDateTime.of(2020, 11,16,12,30)));
@@ -39,13 +42,10 @@ public class TaskServiceImpl implements TaskService {
     public void addTask(TaskDTO task) {
         Task t = new Task(task.getName(), task.getDescription(), task.getDueDate());
         repository.save(t);
-        //int id = tasks.get(tasks.size()-1).getId() + 1;
-        //task.setId(id);
-        //tasks.add(task);
     }
 
     @Override
-    public Task getTask(int id) {
+    public Task getTask(long id) {
         for (Task t : repository.findAll()){
             if (t.getId() == id){
                 return t;
@@ -58,11 +58,15 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void addSubtask(SubtaskDTO task) {
         //Subtask t = new Subtask(task.getName(), task.getDescription(),ta);
-
+        Subtask subtask = new Subtask();
+        subtask.setNaam(task.getName());
+        subtask.setDescription(task.getDescription());
+        subtask.setTask(repository.findById(task.getId()).orElse(null));
+        repository.findById(task.getId()).map(post -> subTaskRepository.save(subtask));
     }
 
     @Override
-    public List<Subtask> getSubtasks(int id) {
+    public List<Subtask> getSubtasks(long id) {
         return getTask(id).getSubtasks();
     }
 
