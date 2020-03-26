@@ -39,9 +39,10 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void addTask(TaskDTO task) {
+    public TaskDTO addTask(TaskDTO task) {
         Task t = new Task(task.getName(), task.getDescription(), task.getDueDate());
         repository.save(t);
+        return convert(t);
     }
 
     @Override
@@ -73,5 +74,14 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void taskEdit(TaskDTO task) {
         repository.editTaak(task.getName(), task.getDescription(), task.getDueDate(), task.getId());
+    }
+
+    private TaskDTO convert(Task task){
+        TaskDTO dto = new TaskDTO();
+        dto.setId(task.getId());
+        dto.setName(task.getName());
+        dto.setDueDate(task.getDueDate());
+        dto.setDescription(task.getDescription());
+        return dto;
     }
 }

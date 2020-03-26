@@ -11,7 +11,7 @@ import java.util.List;
 public interface TaskService {
     List<Task> getTasks();
 
-    void addTask(TaskDTO task);
+    TaskDTO addTask(TaskDTO task);
 
     Task getTask(long id);
 
