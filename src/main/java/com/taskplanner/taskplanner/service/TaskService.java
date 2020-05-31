@@ -21,4 +21,5 @@ public interface TaskService {
 
     void taskEdit(TaskDTO task);
 
+    List<Task> getAll();
 }

@@ -74,10 +74,6 @@ public class TaskController {
     @PostMapping("/tasks/edit")
     public String taskEdit(@ModelAttribute TaskDTO task, BindingResult bindingResult, Model model){
         model.addAttribute("task", task);
-        System.out.println(task.getName());
-        System.out.println(task.getDueDate());
-        System.out.println(task.getDescription());
-        System.out.println(task.getId());
         taskService.taskEdit(task);
         return "redirect:/tasks";
     }

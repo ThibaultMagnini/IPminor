@@ -55,10 +55,8 @@ public class TaskServiceImpl implements TaskService {
         return null;
     }
 
-    //TODO fix
     @Override
     public void addSubtask(SubtaskDTO task) {
-        //Subtask t = new Subtask(task.getName(), task.getDescription(),ta);
         Subtask subtask = new Subtask();
         subtask.setNaam(task.getName());
         subtask.setDescription(task.getDescription());
@@ -83,5 +81,10 @@ public class TaskServiceImpl implements TaskService {
         dto.setDueDate(task.getDueDate());
         dto.setDescription(task.getDescription());
         return dto;
+    }
+
+    @Override
+    public List<Task> getAll() {
+        return repository.findAll();
     }
 }
