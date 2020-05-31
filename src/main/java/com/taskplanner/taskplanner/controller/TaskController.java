@@ -75,9 +75,6 @@ public class TaskController {
     public String taskEdit(@ModelAttribute TaskDTO task, BindingResult bindingResult, Model model){
         model.addAttribute("task", task);
         System.out.println(task.getName());
-        System.out.println(task.getDueDate());
-        System.out.println(task.getDescription());
-        System.out.println(task.getId());
         taskService.taskEdit(task);
         return "redirect:/tasks";
     }
@@ -93,7 +90,7 @@ public class TaskController {
 
     @PostMapping("/tasks/sub/create")
     public String addSubtask(@ModelAttribute SubtaskDTO task, BindingResult bindingResult, Model model){
-        model.addAttribute("task",taskService.getTask(task.getId()));
+        model.addAttribute("task",taskService.getTask((int) task.getId()));
         model.addAttribute("taak" , task);
         taskService.addSubtask(task);
         return "redirect:/tasks/" + task.getId();

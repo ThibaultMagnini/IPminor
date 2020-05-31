@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
 <body>
     <ul>
-        <li><a href="/tasks">Tasks</a></li>
-        <li><a href="/tasks/new">Add a new task</a></li>
+        <li><a href="/tasks" th:text="#{tasks}"></a></li>
+        <li><a href="/tasks/new" th:text="#{addtask}"></a></li>
     </ul>
+    <div  id="language" class="d-flex justify-content-end">
+        <button class="btn btn-primary mr-2">NL</button>
+        <button class="btn btn-primary">EN</button>
+    </div>
+    <script src="/switch.js"></script>
 </body>
 </html>

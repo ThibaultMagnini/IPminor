@@ -5,21 +5,26 @@
     <title>New Task</title>
 </head>
 <body>
+<div id="language" class="d-flex justify-content-end">
+    <button class="btn btn-primary mr-2">NL</button>
+    <button class="btn btn-primary">EN</button>
+</div>
     <form method="post" action="/tasks/new" th:object="${task}">
-        <h4>Add Task</h4>
+        <h4 th:text="#{addtask}">Add Task</h4>
         <div>
-            <label for="name">Name: </label>
+            <label for="name" th:text="#{name}"></label>
             <input type="text" th:field="*{name}" required>
         </div>
         <div>
-            <label for="description">Description: </label>
+            <label for="description" th:text="#{descrip}"></label>
             <input type="text" th:field="*{description}" required>
         </div>
         <div>
-            <label for="dueDate">Due Date: </label>
+            <label for="dueDate" th:text="#{duedate}"></label>
             <input type="datetime-local" th:field="*{dueDate}" required>
         </div>
-        <input type="submit" value="Add Task">
+        <input type="submit">
     </form>
+    <script src="/switch.js"></script>
 </body>
 </html>

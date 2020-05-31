@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Repository
 @Component
 public interface TaakRepository extends JpaRepository<Task, Long> {
-    @Modifying
+    @Modifying(flushAutomatically = true)
     @Transactional
     @Query("update Task t set t.name = ?1 , t.description = ?2, t.dueDate = ?3 where t.id = ?4")
     void editTaak(String name, String description, LocalDateTime dueDate, long id);
